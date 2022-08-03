@@ -34,7 +34,7 @@
 <div style="width: 100%; height: 100%; position: relative;">
     <img style="display: table-cell; text-align: center; background-image: url(res/transparent.png); background-size: 700px; top: 0; bottom: 0; left: 0; right: 0; position: absolute; margin: auto;" id="result" />
 </div>
-<img style="border: 0; position: absolute; top: 0; left: 0; right: 0; bottom: 10; opacity: 0; width: 100%; height: 100%;" id="result2" />
+<img style="border: 0; position: absolute; top: 0; left: 0; right: 0; bottom: 10; opacity: 0; width: 100%; height: 100%;" id="result2" onload="save()"/>
 
 <script src="src/top_text.js"></script>
 <script src="src/bottom_text.js"></script>
@@ -44,6 +44,17 @@
     window.addEventListener("load", function () {
         drawer.lang = "cn";
     });
+    function save() {
+        document.fonts.ready.then(function(){
+        var imgs = document.getElementById("result2");
+        var a = document.createElement('a');
+        a.download = '5000cho' + new Date().getTime() || '5000';//这边是文件名，可以自定义
+        a.href = imgs.src;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        window.close();});
+    }
 </script>
 </body>
 </html>

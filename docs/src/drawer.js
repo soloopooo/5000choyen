@@ -127,7 +127,20 @@ Drawer.prototype.onTouchEnd = function(e) {
 };
 
 Drawer.prototype.saveImage = function() {
-    const width = Math.max(this.topText.x + this.topText.w, this.bottomText.x + this.bottomText.w);
+    let q =
+        'top=' + this.topText.value +
+        '&bottom=' + this.bottomText.value +
+        '&bx=' + this.bottomText.x +
+        '&order=' + this.bottomText.useImg +
+        '&color=' + this.useTransparent +
+        '&width=' + Math.max(this.topText.x + this.topText.w, this.bottomText.x + this.bottomText.w) +
+        '&height=' + this.ctx.canvas.height;
+    if (this.lang === "ja") {
+        window.open('re_download.html?' + q);
+    } else {
+        window.open('re_download_cn.html?' + q);
+    }
+    /*const width = Math.max(this.topText.x + this.topText.w, this.bottomText.x + this.bottomText.w);
     const height = this.ctx.canvas.height;
 
     const data = this.ctx.getImageData(0, 0, width, height);
@@ -143,7 +156,7 @@ Drawer.prototype.saveImage = function() {
     a.setAttribute("download", "5000choyen.png");
 
     document.body.appendChild(a);
-    a.click();
+    a.click();*/
 }
 
 Drawer.prototype.openImage = function() {
