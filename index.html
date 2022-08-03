@@ -1,0 +1,198 @@
+﻿<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta http-equiv="Expires" content="0">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="Cache" content="no-cache">
+    <title>5000兆円ジェネレーター super</title>
+    <meta name="description" content="今、話題の5000兆円。そんな5000兆円のような画像を生成できる5000兆円ジェネレーターです。好きな文字を入れて素敵な5000兆円ライフを楽しもう！" />
+    <link rel="stylesheet" href="src/mdui/css/mdui.min.css" />
+    <style type="text/css">
+        @font-face {
+            font-family: "notobk";
+            src: url("res/NotoSansCJKjp-Black.otf") format("opentype");
+        }
+
+        @font-face {
+            font-family: "notoserifbk";
+            src: url("res/NotoSerifCJKjp-Black.otf") format("opentype");
+        }
+    </style>
+    <script src="src/top_text.js"></script>
+    <script src="src/bottom_text.js"></script>
+    <script src="src/drawer.js"></script>
+    <script src="src/index.js"></script>
+    <script type="text/javascript">
+        window.addEventListener('load', function () {
+            drawer.lang = "ja";
+        })
+    </script>
+</head>
+
+<body class="mdui-container-fluid mdui-appbar-with-toolbar">
+    <div class="mdui-appbar mdui-appbar-fixed">
+        <div class="mdui-toolbar">
+            <span class="mdui-typo-title">5000兆円ジェネレーター super</span>
+
+            <div class="mdui-toolbar-spacer"></div>
+
+            <a href="javascript:;" class="mdui-btn mdui-btn-icon" mdui-menu="{target: '#language'}"
+                mdui-tooltip="{content:'言語/Language'}">
+                <i class="mdui-icon material-icons">language</i>
+            </a>
+
+            <ul class="mdui-menu" id="language">
+                <li class="mdui-menu-item" style="text-align:center">
+                    <a href="index.html" class="mdui-ripple" disabled><img
+                            src="https://images.emojiterra.com/google/android-11/128px/1f1ef-1f1f5.png" width="32"
+                            height="32" />日本語</a>
+                </li>
+                <li class="mdui-menu-item" style="text-align:center">
+                    <a href="index_cn.html" class="mdui-ripple"><img
+                            src="https://images.emojiterra.com/google/android-11/128px/1f1e8-1f1f3.png" width="32"
+                            height="32" />简体中文</a>
+                </li>
+            </ul>
+
+            <a href="javascript:widthAdj();" class="mdui-btn mdui-btn-icon" mdui-tooltip="{content:'リフレッシュ'}">
+                <i class="mdui-icon material-icons">refresh</i>
+            </a>
+            <a href="javascript:;" class="mdui-btn mdui-btn-icon" mdui-dialog="{target: '#about'}" mdui-tooltip="{content:'About'}">
+                <i class="mdui-icon material-icons">more_vert</i>
+            </a>
+        </div>
+    </div>
+    <div>
+        <div class="mdui-dialog" id="about">
+            <div class="mdui-dialog-title">Contributor</div>
+            <div class="mdui-dialog-content" style="text-align:center">
+                <span>
+                    作者:
+                    <a href="https://twitter.com/yurafuca">@yurafuca</a>，
+                </span>
+                <br />
+                <span>
+                    原作者:
+                    <a href="https://twitter.com/rarity_rare25">@rarity_rare25</a>（<a
+                        href="https://rare25.github.io/5000choyen/">5000兆円ジェネレーター</a>）
+                </span>
+                <br />
+                <span>
+                    中国語翻訳・字体や字形の修復, UI改良等：
+                    <a href="https://twitter.com/soloopooo">@soloopooo</a>
+                </span>
+                <br />
+                <span>
+                    UI: <a href="https://www.mdui.org/">MDUI</a>
+                    App: <a href="https://www.electronjs.org/">Electron</a>
+                </span>
+                <span>
+                    <div>
+                        ソースコード:
+                        <a href="https://github.com/yurafuca/5000choyen">yurafuca/5000choyen</a>
+                    </div>
+                </span>
+            </div>
+            <div class="mdui-dialog-actions">
+                <button class="mdui-btn mdui-ripple" mdui-dialog-confirm>OK</button>
+            </div>
+        </div>
+    </div>
+    
+
+    
+    <div id="canvasBox">
+        <div>
+            <canvas id="canvas" width="1280px" height="290px"></canvas>
+        </div>
+        <div>
+            <canvas id="canvas2" width="1280px" height="290px" style="display: none;"></canvas>
+        </div>
+    </div>
+    <script>
+        var canvas = document.getElementById('canvas');
+        var canvas2 = document.getElementById('canvas2');
+        var box = document.getElementById('canvasBox');
+        function widthAdj(){
+            canvas.width = box.clientWidth;
+            canvas2.width = box.clientWidth;
+            onChangeState();
+        }
+        window.onresize = function (){
+            widthAdj();
+        }
+    </script>
+    <div class="text-type mdui-container" style="text-align:center">
+        <font color="blue">`欲しい!`</font> の描画に<br />
+        <label class="mdui-radio" for="bar1">
+            <input id="bar1" type="radio" name="text-type" value="image" />
+            <i class="mdui-radio-icon"></i>
+            元ネタの画像を使う
+        </label>
+        <label class="mdui-radio" for="bar2">
+            <input id="bar2" type="radio" name="text-type" value="text" checked />
+            <i class="mdui-radio-icon"></i>
+            文字を生成する</label>
+    </div>
+    <div class="background-color mdui-container" style="text-align:center">
+        画像を保存するとき背景色を<br />
+        <label class="mdui-radio" for="bar3">
+            <input id="bar3" type="radio" name="background-color" value="transparent" />
+            <i class="mdui-radio-icon"></i>透明にする
+        </label>
+        <label class="mdui-radio" for="bar4">
+            <input id="bar4" type="radio" name="background-color" value="white" checked />
+            <i class="mdui-radio-icon"></i>白にする
+        </label>
+    </div>
+
+    <div style="text-align:center">
+        既知の問題: プレビューでは、ウィンドウのサイズを変更すると、描画されたフォントの端が固くなります。<br />
+         そのため、上記のプレビュー画像を直接保存することはお勧めしません。下のボタンを使用し、保存してください。
+    </div>
+
+    <div class="mdui-textfield mdui-textfield-floating-label mdui-container">
+        <label class="mdui-textfield-label">赤色の文字</label>
+        <input id="textboxTop" class="mdui-textfield-input" type="text" spellcheck="false" oninput="onChangeState();" />
+        <div class="mdui-textfield-helper">对于中文用户：请移步右上角地球图标选择中文。日文字库并不适合中文生成，谢谢。</div>
+    </div>
+    
+
+    <div class="mdui-textfield mdui-textfield-floating-label mdui-container">
+        <label class="mdui-textfield-label">銀色の文字</label>
+        <input id="textboxBottom" class="mdui-textfield-input" type="text" spellcheck="false"
+            oninput="onChangeState();" />
+            <div class="mdui-textfield-helper">中国語のユーザー：右上の地球アイコンをクリークして、簡体字中国語を選んでください。</div>
+        </div>
+    </div>
+    <div style="text-align:center">
+        <button type="button" class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent" onclick="drawer.saveImage();">画像を保存する</button>
+        <button type="button" class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent" onclick="drawer.openImage();">画像を新しいタブで開く</button>
+    </div>
+
+
+    <div style="text-align:center" class="mdui-container">
+        <br />
+        <hr />
+    
+        <p>
+            `欲しい!` はドラッグできます。
+            <br />
+            <video autoplay loop muted style="max-width: 600px;">
+                <source src="res/demo.mp4" type="video/mp4" />
+                <source src="res/demo.webm" type="video/webm" />
+            </video>
+        </p>
+        <hr />
+    </div>
+    <script src="src/mdui/js/mdui.min.js"></script>
+</body>
+
+</html>

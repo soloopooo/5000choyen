@@ -1,25 +1,14 @@
 {
-  "name": "5000choyen",
-  "version": "1.0.0",
-  "description": "5000兆円風の文字を描画するWebツールです．",
+  "name": "5000cho_electron",
+  "version": "0.0.0",
+  "description": "A 5000-choyen generator based on yurafuca's 5000choyen.",
   "main": "index.js",
-  "directories": {
-    "doc": "docs"
-  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "electron ."
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/yurafuca/5000choyen.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/yurafuca/5000choyen/issues"
-  },
-  "homepage": "https://github.com/yurafuca/5000choyen#readme",
-  "dependencies": {
-    "eslint": "^4.2.0"
+  "author": "soloopooo",
+  "license": "GPL",
+  "devDependencies": {
+    "electron": "^20.0.0"
   }
 }
